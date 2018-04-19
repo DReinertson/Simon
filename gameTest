@@ -4,21 +4,29 @@
 <html>
 <head>
 <style>
-  .simon{
+  .all{
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.simon{
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
   border-radius: 50%;
   border: 1px solid black;
-  height: 50vw;
-  width: 50vw;
+  height: 90vw;
+  width: 90vw;
   background-color: green;
   justify-content: center;
   align-items: center;
 }
 .colors{
   border: 1px solid black;
-  width: 23vw;
-  height: 23vw;
+  width: 40vw;
+  height: 40vw;
   margin: 0.5vw;
 }
 .colors-topleft{
@@ -37,12 +45,15 @@
 </style>
 </head>
 <body>
+ <div class = 'all'>
   <div class = 'simon' id = 'simon'>
   <div class = 'colors colors-topleft' id = 'colors-top'></div>
   <div class = 'colors colors-topright' id = 'colors-topright'></div>
   <div class = 'colors colors-botleft' id = 'colors-botleft'></div>
   <div class = 'colors colors-botright' id = 'colors-botright'></div>
  
+</div>
+</div>
 </div>
 </div>
 </body>
