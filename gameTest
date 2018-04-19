@@ -6,25 +6,44 @@
 <style>
   .simon{
   display: flex;
+  flex-wrap: wrap;
   border-radius: 50%;
   border: 1px solid black;
   height: 50vw;
   width: 50vw;
+  background-color: green;
   justify-content: center;
+  align-items: center;
 }
-.colors {
+.colors{
   border: 1px solid black;
-  width: 3vw;
-  height: 3vw;
-  margin: 1px;
+  width: 23vw;
+  height: 23vw;
+  margin: 0.5vw;
 }
+.colors-topleft{
+  border-radius: 25vw 0 0 0;
+}
+.colors-topright{
+  border-radius: 0 25vw 0 0;
+}
+.colors-botright{
+  border-radius: 0 0 25vw 0;
+}
+.colors-botleft{
+  border-radius: 0 0 0 25vw;
+}
+
 </style>
 </head>
 <body>
   <div class = 'simon' id = 'simon'>
   <div class = 'colors colors-topleft' id = 'colors-top'></div>
   <div class = 'colors colors-topright' id = 'colors-topright'></div>
+  <div class = 'colors colors-botleft' id = 'colors-botleft'></div>
+  <div class = 'colors colors-botright' id = 'colors-botright'></div>
  
+</div>
 </div>
 </body>
 </html>
