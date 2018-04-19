@@ -1,0 +1,30 @@
+//These first few commits will be me trying to figure out correct div placements. 
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+  .simon{
+  display: flex;
+  border-radius: 50%;
+  border: 1px solid black;
+  height: 50vw;
+  width: 50vw;
+  justify-content: center;
+}
+.colors {
+  border: 1px solid black;
+  width: 3vw;
+  height: 3vw;
+  margin: 1px;
+}
+</style>
+</head>
+<body>
+  <div class = 'simon' id = 'simon'>
+  <div class = 'colors colors-topleft' id = 'colors-top'></div>
+  <div class = 'colors colors-topright' id = 'colors-topright'></div>
+ 
+</div>
+</body>
+</html>
