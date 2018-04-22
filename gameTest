@@ -4,7 +4,7 @@
 <html>
 <head>
 <style>
-  .all{
+ .all{
   width: 100vw;
   height: 90vh;
   display: flex;
@@ -13,7 +13,11 @@
 }
 
 .innerCircle{
-  display: block;
+  flex-wrap: wrap;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   height: 30vw;
   width: 30vw;
@@ -22,6 +26,13 @@
   z-index: 3;
   margin-top: 2vw;
 }
+
+#title{
+  width: 100%;
+  text-align: center;
+  font-size: 10vw;
+}
+
 .simon{
   margin-top: 4vw;
   display: flex;
@@ -39,6 +50,14 @@
   width: 46%;
   height: 46%;
   margin: auto;
+  opacity: 0.8;
+  }
+
+button:focus{
+  outline: 0;
+}
+.colors:hover{
+  opacity: 1;
 }
 .colors-topleft{
   border-radius: 100% 0 0 0;
@@ -96,13 +115,19 @@
 <body>
  <div class = 'all'>
 <div class = 'simon' id = 'simon'>  
-  <div class = 'colors colors-topleft' id = 'colors-topleft'></div>
-  <div class = 'colors colors-topright' id = 'colors-topright'></div>
-  <div class = 'colors colors-botleft' id = 'colors-botleft'></div>
-  <div class = 'colors colors-botright' id = 'colors-botright'></div>
+  <button class = 'colors colors-topleft' id = 'colors-topleft'></button>
+  <button class = 'colors colors-topright' id = 'colors-topright'></button>
+  <button class = 'colors colors-botleft' id = 'colors-botleft'></button>
+  <button class = 'colors colors-botright' id = 'colors-botright'></button>
  
 </div>
-  <div class = 'innerCircle' id = 'innerCircle'></div>
+  <div class = 'innerCircle' id = 'innerCircle'>
+    <div class = 'innerCircleItem' id = 'title'>SIMON</div>
+    <div class = 'innerCircleItem' id = 'counter'>#</div>
+    <button class = 'btn innerCircleItem' id = 'start'>start</button>
+    <button class = 'btn innerCircleItem' id = 'strict'>strict</button>
+      
+  </div>
 </div>
 </body>
 </html>
