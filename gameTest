@@ -6,58 +6,83 @@
 <style>
   .all{
   width: 100vw;
-  height: 100vw;
+  height: 90vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.innerCircle{
+  display: block;
+  position: absolute;
+  height: 30vw;
+  width: 30vw;
+  border-radius: 50%;
+  background-color: black;
+  z-index: 3;
+  margin-top: 2vw;
 }
 .simon{
+  margin-top: 4vw;
   display: flex;
   flex-wrap: wrap;
   border-radius: 50%;
   border: 1px solid black;
-  height: 50vw;
-  width: 50vw;
-  background-color: green;
+  height: 60vw;
+  width: 60vw;
+  background-color: black;
   justify-content: space-evenly;
   align-items: center;
 }
 .colors{
   border: 1px solid black;
-  width: 23vw;
-  height: 23vw;
+  width: 46%;
+  height: 46%;
   margin: auto;
 }
 .colors-topleft{
   border-radius: 100% 0 0 0;
+  background-color: green;
 }
 .colors-topright{
   border-radius: 0 100% 0 0;
+  background-color: red;
 }
 .colors-botright{
   border-radius: 0 0 100% 0;
+  background-color: blue;
 }
 .colors-botleft{
   border-radius: 0 0 0 100%;
+  background-color: yellow;
 }
 
-@media screen and (min-width: 1600px){
+@media screen and (min-width: 1050px){
   .simon{
-    width: 43vw;
-    height: 43vw;
+    width: 60vw;
+    height: 60vw;
+  }
+  .innerCircle{
+    width: 30vw;
+    height: 30vw;
   }
   .colors{
-    width: 20vw;
-    height: 20vw;
+    width: 46%;
+    height: 46%;
   }
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 850px){
   .all{
     align-items: center;
   }
   .simon{
-    width: 80vw;
-    height: 80vw;
+    width: 90vw;
+    height: 90vw;
+  }
+  .innerCircle{
+    width: 45vw;
+    height: 45vw;
   }
   .colors{
     width: 46%;
@@ -70,15 +95,14 @@
 </head>
 <body>
  <div class = 'all'>
-  <div class = 'simon' id = 'simon'>
-  <div class = 'colors colors-topleft' id = 'colors-top'></div>
+<div class = 'simon' id = 'simon'>  
+  <div class = 'colors colors-topleft' id = 'colors-topleft'></div>
   <div class = 'colors colors-topright' id = 'colors-topright'></div>
   <div class = 'colors colors-botleft' id = 'colors-botleft'></div>
   <div class = 'colors colors-botright' id = 'colors-botright'></div>
  
 </div>
-</div>
-</div>
+  <div class = 'innerCircle' id = 'innerCircle'></div>
 </div>
 </body>
 </html>
