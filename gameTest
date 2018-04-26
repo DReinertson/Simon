@@ -45,12 +45,16 @@
   justify-content: space-evenly;
   align-items: center;
 }
+#title{
+  font-size: 7vw;
+}
 .colors{
   border: 1px solid black;
   width: 46%;
   height: 46%;
   margin: auto;
   opacity: 0.8;
+  cursor: pointer;
   }
 
 button:focus{
@@ -106,6 +110,9 @@ button:focus{
   .colors{
     width: 46%;
     height: 46%;
+  }
+  #title{
+    font-size: 11vw;
   }
   
 }
