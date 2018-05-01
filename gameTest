@@ -145,6 +145,7 @@ var playerArray = [];
 var turn;
 
 $(".colors").on("click touchend", function(){
+  //add sound to each color. 
   if (turn == "player"){
   addColor(this.id, playerArray);
   console.log("playerArray after push:", playerArray);
@@ -156,10 +157,19 @@ function addColor(colorId, arr){
 }
 
 function computerTurn(){
+  //need to simulate button click and press it for a certain amount of time. 
+  //https://stackoverflow.com/questions/35156401/simulate-a-click-and-hold-for-5-sec-on-element-with-jquery
   var random = Math.floor(Math.random() * Math.floor(colorArray.length))
   addColor(colorArray[random], computerArray);
   console.log(computerArray);
+  var color = colorArray[random];
+  $("#" + color).active();
+  console.log('computerArray after mousedown:', computerArray);
+  $("#" + color).
 }
+
+computerTurn();
+
 </script>
 </body>
 </html>
