@@ -163,9 +163,9 @@ function computerTurn(){
   addColor(colorArray[random], computerArray);
   console.log(computerArray);
   var color = colorArray[random];
-  $("#" + color).active();
+  console.log($("#" + color).text());
+  $("#" + color).addClass("active").delay(3000).queue(function(){$(this).removeClass("active")});
   console.log('computerArray after mousedown:', computerArray);
-  $("#" + color).
 }
 
 computerTurn();
