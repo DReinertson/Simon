@@ -163,7 +163,9 @@ $(".colors").on("click touchstart", function(){
     }
       turn = 'computer';
       console.log('going to computer');
-      computerTurn();
+      setTimeout(function(){
+        computerTurn();
+      },1000)
     }
   }
 })
@@ -181,11 +183,16 @@ function computerTurn(){
   
   if (counter >= 1){
     for (var y in computerArray){
+      setTimeout(function(){
+      var color = computerArray[y];
       console.log('computerArray in loop:', computerArray);
       console.log('computerArray for loop:', computerArray[y]);
       console.log(computerArray[y], 'going active');
-      $("#" + computerArray[y]).addClass("active").delay(1000).queue(function(){$(computerArray[y]).removeClass("active")});
+      console.log('activating color');
+      $("#" + color).addClass("active").delay(1000).queue(function(){$("#" + color).removeClass("active")});
+      //$("#" + computerArray[y]).addClass("active").delay(1000).queue(function(){$(computerArray[y]).removeClass("active")});
       console.log(computerArray[y], 'leaving active');
+      },1000)
     }
   }
   var random = Math.floor(Math.random() * Math.floor(colorArray.length))
@@ -204,6 +211,7 @@ $('#start').on('click touchend', function(){
   counter = 0;
   computerTurn();
 })
+
 
 
 </script>
