@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+ .all{
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerCircle{
+  flex-wrap: wrap;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 30vw;
+  width: 30vw;
+  border-radius: 50%;
+  background-color: black;
+  z-index: 3;
+  margin-top: 2vw;
+}
+
+#title{
+  width: 100%;
+  text-align: center;
+  font-size: 10vw;
+}
+
+.simon{
+  margin-top: 4vw;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 50%;
+  border: 1px solid black;
+  height: 60vw;
+  width: 60vw;
+  background-color: black;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#title{
+  font-size: 7vw;
+}
+.colors{
+  border: 1px solid black;
+  width: 46%;
+  height: 46%;
+  margin: auto;
+  opacity: 0.8;
+  cursor: pointer;
+  }
+
+button:focus{
+  outline: 0;
+}
+.colors:hover{
+  opacity: 1;
+}
+.colors-topleft{
+  border-radius: 100% 0 0 0;
+  background-color: green;
+}
+.colors-topright{
+  border-radius: 0 100% 0 0;
+  background-color: red;
+}
+.colors-botright{
+  border-radius: 0 0 100% 0;
+  background-color: blue;
+}
+.colors-botleft{
+  border-radius: 0 0 0 100%;
+  background-color: yellow;
+}
+
+@media screen and (min-width: 1050px){
+  .simon{
+    width: 60vw;
+    height: 60vw;
+  }
+  .innerCircle{
+    width: 30vw;
+    height: 30vw;
+  }
+  .colors{
+    width: 46%;
+    height: 46%;
+  }
+}
+
+@media screen and (max-width: 850px){
+  .all{
+    align-items: center;
+  }
+  .simon{
+    width: 90vw;
+    height: 90vw;
+  }
+  .innerCircle{
+    width: 45vw;
+    height: 45vw;
+  }
+  .colors{
+    width: 46%;
+    height: 46%;
+  }
+  #title{
+    font-size: 11vw;
+  }
+  
+}
+
+</style>
+</head>
+<body>
+ <div class = 'all'>
+<div class = 'simon' id = 'simon'>  
+  <button class = 'colors colors-topleft' id = 'colors-topleft'></button>
+  <button class = 'colors colors-topright' id = 'colors-topright'></button>
+  <button class = 'colors colors-botleft' id = 'colors-botleft'></button>
+  <button class = 'colors colors-botright' id = 'colors-botright'></button>
+ 
+</div>
+  <div class = 'innerCircle' id = 'innerCircle'>
+    <div class = 'innerCircleItem' id = 'title'>SIMON</div>
+    <div class = 'innerCircleItem' id = 'counter'>#</div>
+    <button class = 'btn innerCircleItem' id = 'start'>start</button>
+    <button class = 'btn innerCircleItem' id = 'strict'>strict</button>
+      
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+var colorArray = ["green", "blue", "yellow", "red"];
+var computerArray = [];
+var playerArray = [];
+var turn;
+var counter;
+var loopX = 0;
+var done;
+
+$(".colors").on("click touchstart", function(){
+  //Almost a recursion occurring! 
+  //add sound to each color. 
+  //need to make the check arrays only occur once playerArray.length == computerArray.length
+  if (turn == "player"){
+    addColor(this.id, playerArray);
+    console.log("playerArray after push:", playerArray);
+    console.log('player:', playerArray, 'computer', computerArray);
+    console.log(playerArray.length == computerArray.length);
+    if (playerArray.length == computerArray.length){
+    for (var x in playerArray){
+      if (playerArray[x] !== computerArray[x]){
+        console.log('you lost');
+        return;
+      }
+    }
+      turn = 'computer';
+      console.log('going to computer');
+      setTimeout(function(){
+        computerTurn();
+      },1000)
+    }
+  }
+})
+
+function addColor(colorId, arr){
+  arr.push(colorId);
+}
+
+function activate(colorId){
+  $("#" + colorId).addClass("active").delay(1000).queue(function(){
+    $("#" + colorId).removeClass("active").dequeue()});
+}
+
+function arrayLoop(arr){
+  setTimeout(function(){
+    console.log('in arrayLoop');
+    var color = arr[loopX];
+    activate(color);
+    loopX++;
+    console.log('x:', loopX);
+    if (loopX < arr.length){
+      arrayLoop(arr);
+    }
+    else {
+      computerColor(arr);
+      return;
+    }
+  },2000);
+}
+var test = ["green", "blue", "blue", "red"];
+function ready(){
+  var testPromise = new Promise(function(resolve, reject){
+    arrayLoop(test);
+    if (done == true){
+      resolve(computerColor(test));
+    }
+  });
+}
+arrayLoop(test);
+
+
+function computerColor(arr){
+  console.log('in computerColor');
+  var random = Math.floor(Math.random() * Math.floor(colorArray.length))
+    addColor(colorArray[random], arr);
+    console.log(arr);
+    var color = colorArray[random];
+    var time = 2000;
+    console.log('time:', time);
+    setTimeout(function(){
+    activate(color);
+    turn = "player";
+    playerArray = [];
+    },time)
+  console.log('leaving computercolor()');
+}
+
+
+
+
+function computerTurn(){
+  //Will need to make this compiled each turn. Maintain first press is always the same color once first round goes, i.e. [red], [red, blue], [red, blue, blue]. And be able to go through array to show each color every round. Will need to use for loop to "press" each button in the sequence, then use the function to add another color to that array. Each time it's the player's turn, start the array over?
+  counter += 1;
+  console.log('counter:', counter);
+  $("#counter").text(counter);
+  
+  if (counter > 1){
+    var promise = new Promise(function(resolve, reject){
+      resolve(computerColor());
+    });
+    console.log('counter > 1, going into arrayLoop');
+    loopX = 0;
+    promise.then(function(){
+      return arrayLoop(computerArray);
+    })
+  }
+  //Will need to make new function that includes adding the new color and activating it. Within that function have the activate function using promise.then (https://stackoverflow.com/questions/21518381/proper-way-to-wait-for-one-function-to-finish-before-continuing).
+    else{
+      computerColor(computerArray);
+    }
+}
+
+$('#start').on('click touchend', function(){
+  playerArray = [];
+  computerArray = [];
+  counter = 0;
+  computerTurn();
+})
+
+
+
+</script>
+</body>
+</html>
