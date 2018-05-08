@@ -195,16 +195,7 @@ function arrayLoop(arr){
     }
   },2000);
 }
-var test = ["green", "blue", "blue", "red"];
-function ready(){
-  var testPromise = new Promise(function(resolve, reject){
-    arrayLoop(test);
-    if (done == true){
-      resolve(computerColor(test));
-    }
-  });
-}
-arrayLoop(test);
+
 
 
 function computerColor(arr){
@@ -233,14 +224,8 @@ function computerTurn(){
   $("#counter").text(counter);
   
   if (counter > 1){
-    var promise = new Promise(function(resolve, reject){
-      resolve(computerColor());
-    });
-    console.log('counter > 1, going into arrayLoop');
     loopX = 0;
-    promise.then(function(){
-      return arrayLoop(computerArray);
-    })
+    arrayLoop(computerArray);
   }
   //Will need to make new function that includes adding the new color and activating it. Within that function have the activate function using promise.then (https://stackoverflow.com/questions/21518381/proper-way-to-wait-for-one-function-to-finish-before-continuing).
     else{
@@ -254,6 +239,9 @@ $('#start').on('click touchend', function(){
   counter = 0;
   computerTurn();
 })
+
+
+
 
 
 
