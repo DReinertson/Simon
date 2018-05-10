@@ -18,7 +18,6 @@
   color: white;
   flex-wrap: wrap;
   justify-content: center;
-  font-size: 15vw;
   border-radius: 50%;
   opacity: 0.9;
   align-items: center;
@@ -29,7 +28,13 @@
   z-index: 9;
 }
 .choice{
+  display: flex;
   cursor: pointer;
+  border: none;
+  font-size: 9.5vw;
+  opacity: 0.9;
+  background-color: transparent;
+  color: white;
 }
 
 .innerCircle{
@@ -178,6 +183,18 @@ var loopX = 0;
 var done;
 var time = 1000;
 
+$(".lose-overlay").hide();
+
+$(".try-again").on("click touchend", function(){
+  $(".lose-overlay").hide();
+  console.log("doing things");
+})
+
+$(".start-over").on('click touchend', function(){
+  $(".lose-overlay").hide();
+  start();
+})
+
 $(".colors").on("click touchstart", function(){
   //Almost a recursion occurring! 
   //add sound to each color.
@@ -185,11 +202,11 @@ $(".colors").on("click touchstart", function(){
     addColor(this.id, playerArray);
     console.log("playerArray after push:", playerArray);
     console.log('player:', playerArray, 'computer', computerArray);
-    console.log(playerArray.length == computerArray.length);
     if (playerArray.length == computerArray.length){
     for (var x in playerArray){
       if (playerArray[x] !== computerArray[x]){
         console.log('Input overlay with you lost & try again/start over?');
+        $('.lose-overlay').show();
         //If try again: run through colors again and allow for choosing.
         //Try again function that resets playerArray, turn = 'player', does loopArray(thisArray) without computerTurn() at the end. Could add if statement for try again variable in loopArray that prevents computerTurn() from running?
         //If start over, maybe remake button function into actual function called 'start'? and run that. Reset parameters and do computerTurn();
@@ -267,12 +284,20 @@ function computerTurn(){
     }
 }
 
-$('#start').on('click touchend', function(){
+function start(){
   playerArray = [];
   computerArray = [];
   counter = 0;
   computerTurn();
+}
+
+$('#start').on('click touchend', function(){
+  start();
 })
+
+
+
+
 
 
 
