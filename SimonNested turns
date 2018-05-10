@@ -10,6 +10,28 @@
   align-items: center;
 }
 
+.lose-overlay{
+  text-align: center;
+  display: flex;
+  position: absolute;
+  background-color: black;
+  color: white;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 15vw;
+  border-radius: 50%;
+  opacity: 0.9;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 9;
+}
+.choice{
+  cursor: pointer;
+}
+
 .innerCircle{
   flex-wrap: wrap;
   color: white;
@@ -35,6 +57,7 @@
   margin-top: 4vw;
   display: flex;
   flex-wrap: wrap;
+  position: absolute;
   border-radius: 50%;
   border: 1px solid black;
   height: 60vw;
@@ -51,16 +74,21 @@
   width: 46%;
   height: 46%;
   margin: auto;
-  opacity: 0.8;
+  opacity: 0.75;
   cursor: pointer;
   }
+
+#blue:active, #green:active, #yellow:active, #red:active{
+  opacity: 1;
+}
+#blue.active, #green.active, #yellow.active, #red.active{
+  opacity: 1;
+}
 
 button:focus{
   outline: 0;
 }
-.colors:hover{
-  opacity: 1;
-}
+
 .colors-topleft{
   border-radius: 100% 0 0 0;
   background-color: green;
@@ -120,10 +148,14 @@ button:focus{
 <body>
  <div class = 'all'>
 <div class = 'simon' id = 'simon'>  
-  <button class = 'colors colors-topleft' id = 'colors-topleft'></button>
-  <button class = 'colors colors-topright' id = 'colors-topright'></button>
-  <button class = 'colors colors-botleft' id = 'colors-botleft'></button>
-  <button class = 'colors colors-botright' id = 'colors-botright'></button>
+  <div class = "lose-overlay" id = "lose-overlay">
+    <button class = 'try-again choice' id = 'try-again'>Try-again?</button>
+    <button class = 'start-over choice' id = 'start-over'>Start Over</button>
+  </div>
+  <button class = 'colors colors-topleft' id = "green"></button>
+  <button class = 'colors colors-topright' id = "red"></button>
+  <button class = 'colors colors-botleft' id = "yellow"></button>
+  <button class = 'colors colors-botright' id = "blue"></button>
  
 </div>
   <div class = 'innerCircle' id = 'innerCircle'>
@@ -131,10 +163,10 @@ button:focus{
     <div class = 'innerCircleItem' id = 'counter'>#</div>
     <button class = 'btn innerCircleItem' id = 'start'>start</button>
     <button class = 'btn innerCircleItem' id = 'strict'>strict</button>
+    <div class = 'innerCircleItem' id = 'on/off'>On</div>
       
   </div>
 </div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 var colorArray = ["green", "blue", "yellow", "red"];
