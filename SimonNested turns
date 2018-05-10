@@ -144,11 +144,11 @@ var turn;
 var counter;
 var loopX = 0;
 var done;
+var time = 1000;
 
 $(".colors").on("click touchstart", function(){
   //Almost a recursion occurring! 
-  //add sound to each color. 
-  //need to make the check arrays only occur once playerArray.length == computerArray.length
+  //add sound to each color.
   if (turn == "player"){
     addColor(this.id, playerArray);
     console.log("playerArray after push:", playerArray);
@@ -157,7 +157,10 @@ $(".colors").on("click touchstart", function(){
     if (playerArray.length == computerArray.length){
     for (var x in playerArray){
       if (playerArray[x] !== computerArray[x]){
-        console.log('you lost');
+        console.log('Input overlay with you lost & try again/start over?');
+        //If try again: run through colors again and allow for choosing.
+        //Try again function that resets playerArray, turn = 'player', does loopArray(thisArray) without computerTurn() at the end. Could add if statement for try again variable in loopArray that prevents computerTurn() from running?
+        //If start over, maybe remake button function into actual function called 'start'? and run that. Reset parameters and do computerTurn();
         return;
       }
     }
@@ -165,7 +168,7 @@ $(".colors").on("click touchstart", function(){
       console.log('going to computer');
       setTimeout(function(){
         computerTurn();
-      },1000)
+      },time)
     }
   }
 })
@@ -175,7 +178,7 @@ function addColor(colorId, arr){
 }
 
 function activate(colorId){
-  $("#" + colorId).addClass("active").delay(1000).queue(function(){
+  $("#" + colorId).addClass("active").delay(time).queue(function(){
     $("#" + colorId).removeClass("active").dequeue()});
 }
 
@@ -193,7 +196,7 @@ function arrayLoop(arr){
       computerColor(arr);
       return;
     }
-  },2000);
+  },time + 500);
 }
 
 
@@ -204,13 +207,12 @@ function computerColor(arr){
     addColor(colorArray[random], arr);
     console.log(arr);
     var color = colorArray[random];
-    var time = 2000;
     console.log('time:', time);
     setTimeout(function(){
     activate(color);
     turn = "player";
     playerArray = [];
-    },time)
+    },time + 500)
   console.log('leaving computercolor()');
 }
 
@@ -239,9 +241,6 @@ $('#start').on('click touchend', function(){
   counter = 0;
   computerTurn();
 })
-
-
-
 
 
 
