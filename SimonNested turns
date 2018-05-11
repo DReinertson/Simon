@@ -183,8 +183,19 @@ var loopX = 0;
 var done;
 var time = 1000;
 var repeat; 
+var strict;
 
 $(".lose-overlay").hide();
+
+$("#strict").on("click touchend", function(){
+  if (strict == true){
+    strict = false;
+  }
+  else{
+    strict = true;
+  }
+  console.log('strict', strict);
+})
 
 $(".try-again").on("click touchend", function(){
   $(".lose-overlay").hide();
@@ -214,6 +225,12 @@ $(".colors").on("click touchstart", function(){
       if (playerArray[x] !== computerArray[x]){
         console.log('Input overlay with you lost & try again/start over?');
         $('.lose-overlay').show();
+        if (strict == true){
+        $('.try-again').hide();
+        }
+        else {
+          $(".try-again").show();
+        }
         //If try again: run through colors again and allow for choosing.
         //Try again function that resets playerArray, turn = 'player', does loopArray(thisArray) without computerTurn() at the end. Could add if statement for try again variable in loopArray that prevents computerTurn() from running?
         //If start over, maybe remake button function into actual function called 'start'? and run that. Reset parameters and do computerTurn();
