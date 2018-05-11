@@ -182,12 +182,19 @@ var counter;
 var loopX = 0;
 var done;
 var time = 1000;
+var repeat; 
 
 $(".lose-overlay").hide();
 
 $(".try-again").on("click touchend", function(){
   $(".lose-overlay").hide();
   console.log("doing things");
+  turn = 'player'
+  repeat = true;
+  loopX = 0;
+  playerArray = [];
+  arrayLoop(computerArray);
+  
 })
 
 $(".start-over").on('click touchend', function(){
@@ -214,6 +221,7 @@ $(".colors").on("click touchstart", function(){
       }
     }
       turn = 'computer';
+      repeat = false;
       console.log('going to computer');
       setTimeout(function(){
         computerTurn();
@@ -242,6 +250,9 @@ function arrayLoop(arr){
       arrayLoop(arr);
     }
     else {
+      if (repeat == true){
+        return;
+      }
       computerColor(arr);
       return;
     }
@@ -285,6 +296,7 @@ function computerTurn(){
 }
 
 function start(){
+  repeat;
   playerArray = [];
   computerArray = [];
   counter = 0;
@@ -294,9 +306,6 @@ function start(){
 $('#start').on('click touchend', function(){
   start();
 })
-
-
-
 
 
 
