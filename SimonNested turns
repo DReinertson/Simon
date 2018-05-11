@@ -188,13 +188,18 @@ var strict;
 $(".lose-overlay").hide();
 
 $("#strict").on("click touchend", function(){
-  if (strict == true){
-    strict = false;
+  if (computerArray.length < 2){
+    if (strict == true){
+      strict = false;
+    }
+    else{
+      strict = true;
+    }
   }
-  else{
-    strict = true;
+  else {
+    return;
   }
-  console.log('strict', strict);
+  console.log('strict:', strict);
 })
 
 $(".try-again").on("click touchend", function(){
@@ -323,7 +328,6 @@ function start(){
 $('#start').on('click touchend', function(){
   start();
 })
-
 
 
 
