@@ -52,12 +52,23 @@
   margin-top: 2vw;
 }
 
+.innerCircleItem{
+  margin: 1px;
+  padding 1px;
+}
 #title{
   width: 100%;
   text-align: center;
   font-size: 10vw;
 }
 
+#counter{
+  border: 1px white solid;
+  width: 10%;
+  height: 7%;
+  display: flex;
+  justify-content: center;
+}
 .simon{
   margin-top: 4vw;
   display: flex;
@@ -83,6 +94,10 @@
   cursor: pointer;
   outline: none;
   }
+button{
+  border: none;
+  cursor: pointer;
+}
 
 
 
@@ -152,7 +167,6 @@ button:focus{
   
 }
 
-
 </style>
 </head>
 <body>
@@ -172,7 +186,9 @@ button:focus{
     <div class = 'innerCircleItem' id = 'title'>SIMON</div>
     <div class = 'innerCircleItem' id = 'counter'>#</div>
     <button class = 'btn innerCircleItem' id = 'start'>start</button>
+    <div class = "innerCircleItem" id = "strictCircle">
     <button class = 'btn innerCircleItem' id = 'strict'>strict</button>
+    </div>
     <div class = 'innerCircleItem' id = 'on/off'>On</div>
       
   </div>
