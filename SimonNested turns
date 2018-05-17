@@ -2,7 +2,7 @@
 <html>
 <head>
 <style>
- .all{
+.all{
   width: 100vw;
   height: 90vh;
   display: flex;
@@ -53,8 +53,7 @@
 }
 
 .innerCircleItem{
-  margin: 1px;
-  padding 1px;
+  margin: 3px;
 }
 #title{
   width: 100%;
@@ -84,6 +83,29 @@
 }
 #title{
   font-size: 7vw;
+}
+
+#strictCircle{
+  height: 3vw;
+  width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background-color: teal;
+}
+#indicator{
+  width: 100%;
+  border: 1px white solid;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+#strict, #start{
+  
+  width: 10vw;
+  height: 3vw;
+  
 }
 .colors{
   border: 1px solid black;
@@ -187,9 +209,9 @@ button:focus{
     <div class = 'innerCircleItem' id = 'counter'>#</div>
     <button class = 'btn innerCircleItem' id = 'start'>start</button>
     <div class = "innerCircleItem" id = "strictCircle">
+      <div class = "indicator" id = "indicator"></div>
     <button class = 'btn innerCircleItem' id = 'strict'>strict</button>
     </div>
-    <div class = 'innerCircleItem' id = 'on/off'>On</div>
       
   </div>
 </div>
@@ -208,13 +230,19 @@ var strict;
 
 $(".lose-overlay").hide();
 
+$('.colors').on('click touchend', function(x){
+  console.log('preventing');
+  x.preventDefault();
+  return;
+})
+
 $("#strict").on("click touchend", function(){
   if (computerArray.length < 2){
     if (strict == true){
-      strict = false;
+      strict = false;      document.getElementById("indicator").style.backgroundColor = "black";
     }
     else{
-      strict = true;
+      strict = true;      document.getElementById("indicator").style.backgroundColor = "red";
     }
   }
   else {
@@ -349,6 +377,9 @@ function start(){
 $('#start').on('click touchend', function(){
   start();
 })
+
+
+
 
 
 
