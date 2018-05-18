@@ -67,16 +67,18 @@
   text-align: center;
   width: 100%;
   margin: 3% 0;
+  font-size: 2vw;
 }
 #startButton, #strictButton{
   width: 60%;
   height: 60%;
   border-radius: 50%;
   border: 0.5vw tan solid;
-  box-shadow: 0 6px #999;
+  box-shadow: 0 0.5vw #999;
+  margin-bottom: 7%;
 }
 #startButton:active, #strictButton:active{
-  box-shadow: 0 5px #666;
+  box-shadow: 0 0.25vw #666;
   transform: translatY(4px);
 }
 #startButton{
@@ -86,18 +88,23 @@
   background-color: yellow;
 }
 #counter{
-  border: 0.3vw solid red;
+  border: 0.2vw solid white;
+  height: 10%;
+  font-size: 3.5vw;
+  color: red;
+  margin-bottom: 5%;
+  margin-right: 5%;
 }
 #start{
 }
 #strict{
-  padding-bottom: 13%;
+  margin-bottom: 13.5%;
 }
 
 #title{
   width: 100%;
   text-align: center;
-  font-size: 10vw;
+  font-size: 8vw;
 }
 
 
@@ -124,7 +131,7 @@
   width: 25%;
   height: 25%;
   border-radius: 50%;
-  margin: 3% 5%;
+  margin: 3% 15%;
 }
 
 .colors{
@@ -209,7 +216,6 @@ button:focus{
   
 }
 
-
 </style>
 </head>
 <body>
@@ -227,7 +233,7 @@ button:focus{
 </div>
   <div class = 'innerCircle' id = 'innerCircle'>
     <div class = 'innerCircleItem' id = 'title'>SIMON</div>
-    <div class = 'innerCircleItem' id = 'counter'>#</div>
+    <div class = 'innerCircleItem' id = 'counter'>0</div>
     
     <div class = 'innerCircleItem' id = 'start'>      
     <button class = 'btn innerCircleItem' id = 'startButton'></button>
@@ -256,6 +262,7 @@ var repeat;
 var strict;
 
 $(".lose-overlay").hide();
+
 
 $('.colors').on('click touchend', function(x){
   console.log('preventing');
@@ -381,7 +388,12 @@ function computerTurn(){
   //Will need to make this compiled each turn. Maintain first press is always the same color once first round goes, i.e. [red], [red, blue], [red, blue, blue]. And be able to go through array to show each color every round. Will need to use for loop to "press" each button in the sequence, then use the function to add another color to that array. Each time it's the player's turn, start the array over?
   counter += 1;
   console.log('counter:', counter);
+  if (counter < 10){
+    $("#counter").text("0" + counter);
+  }
+  else{
   $("#counter").text(counter);
+  }
   
   if (counter > 1){
     loopX = 0;
@@ -404,8 +416,6 @@ function start(){
 $('#start').on('click touchend', function(){
   start();
 })
-
-
 
 
 
