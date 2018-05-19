@@ -265,7 +265,6 @@ $(".lose-overlay").hide();
 
 
 $('.colors').on('click touchend', function(x){
-  console.log('preventing');
   x.preventDefault();
   return;
 })
@@ -302,16 +301,14 @@ $(".start-over").on('click touchend', function(){
 })
 
 $(".colors").on("click touchstart", function(){
-  //Almost a recursion occurring! 
-  //add sound to each color.
   if (turn == "player"){
     addColor(this.id, playerArray);
-    console.log("playerArray after push:", playerArray);
-    console.log('player:', playerArray, 'computer', computerArray);
+    
+    //Make sure that after the color press the player array matches the computer array.     
     if (playerArray.length == computerArray.length){
     for (var x in playerArray){
+      //If player has chosen a wrong color, overlay will come up with try-again or start-over options. If strict is on, start-over will be only option. 
       if (playerArray[x] !== computerArray[x]){
-        console.log('Input overlay with you lost & try again/start over?');
         $('.lose-overlay').show();
         if (strict == true){
         $('.try-again').hide();
@@ -319,15 +316,11 @@ $(".colors").on("click touchstart", function(){
         else {
           $(".try-again").show();
         }
-        //If try again: run through colors again and allow for choosing.
-        //Try again function that resets playerArray, turn = 'player', does loopArray(thisArray) without computerTurn() at the end. Could add if statement for try again variable in loopArray that prevents computerTurn() from running?
-        //If start over, maybe remake button function into actual function called 'start'? and run that. Reset parameters and do computerTurn();
         return;
       }
     }
       turn = 'computer';
       repeat = false;
-      console.log('going to computer');
       setTimeout(function(){
         computerTurn();
       },time)
@@ -344,13 +337,12 @@ function activate(colorId){
     $("#" + colorId).removeClass("active").dequeue()});
 }
 
+//Function that will go through computer Array and activate colors that are in the array for allotted amount of time. At end of array, will add another color to the end, unless repeat ('try-again was chosen') is true, then it will just repeat the array without adding color. 
 function arrayLoop(arr){
   setTimeout(function(){
-    console.log('in arrayLoop');
     var color = arr[loopX];
     activate(color);
     loopX++;
-    console.log('x:', loopX);
     if (loopX < arr.length){
       arrayLoop(arr);
     }
@@ -367,7 +359,6 @@ function arrayLoop(arr){
 
 
 function computerColor(arr){
-  console.log('in computerColor');
   var random = Math.floor(Math.random() * Math.floor(colorArray.length))
     addColor(colorArray[random], arr);
     console.log(arr);
@@ -387,7 +378,6 @@ function computerColor(arr){
 function computerTurn(){
   //Will need to make this compiled each turn. Maintain first press is always the same color once first round goes, i.e. [red], [red, blue], [red, blue, blue]. And be able to go through array to show each color every round. Will need to use for loop to "press" each button in the sequence, then use the function to add another color to that array. Each time it's the player's turn, start the array over?
   counter += 1;
-  console.log('counter:', counter);
   if (counter < 10){
     $("#counter").text("0" + counter);
   }
@@ -399,7 +389,6 @@ function computerTurn(){
     loopX = 0;
     arrayLoop(computerArray);
   }
-  //Will need to make new function that includes adding the new color and activating it. Within that function have the activate function using promise.then (https://stackoverflow.com/questions/21518381/proper-way-to-wait-for-one-function-to-finish-before-continuing).
     else{
       computerColor(computerArray);
     }
@@ -416,6 +405,13 @@ function start(){
 $('#start').on('click touchend', function(){
   start();
 })
+
+function sound(){
+  
+}
+function win(){
+  
+}
 
 
 
