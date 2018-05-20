@@ -226,9 +226,22 @@ button:focus{
     <button class = 'start-over choice' id = 'start-over'>Start Over</button>
   </div>
   <button class = 'colors colors-topleft' id = "green"></button>
+  <audio id = 'greenSound' preload = 'auto'>
+    <source src = 'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'></source>
+  </audio>
   <button class = 'colors colors-topright' id = "red"></button>
+  <audio id = 'redSound' preload = 'auto'>
+    <source src = 'https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'></source>
+  </audio>
   <button class = 'colors colors-botleft' id = "yellow"></button>
+  <audio id = 'yellowSound' preload = 'auto'>
+    <source src = 'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'></source>
+  </audio>
   <button class = 'colors colors-botright' id = "blue"></button>
+  <audio id = 'blueSound' preload = 'auto'>
+    <source src = 'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'></source>
+  </audio>
+
  
 </div>
   <div class = 'innerCircle' id = 'innerCircle'>
@@ -248,6 +261,7 @@ button:focus{
       
   </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 var colorArray = ["green", "blue", "yellow", "red"];
@@ -300,10 +314,15 @@ $(".start-over").on('click touchend', function(){
   start();
 })
 
+function soundPlay(color){
+  var audio = $("#" + color + "Sound")[0];
+  audio.play();
+}
+
 $(".colors").on("click touchstart", function(){
-  if (turn == "player"){
+  soundPlay(this.id);
     addColor(this.id, playerArray);
-    
+  if (turn == "player"){
     //Make sure that after the color press the player array matches the computer array.     
     if (playerArray.length == computerArray.length){
     for (var x in playerArray){
@@ -333,6 +352,7 @@ function addColor(colorId, arr){
 }
 
 function activate(colorId){
+  soundPlay(colorId);
   $("#" + colorId).addClass("active").delay(time).queue(function(){
     $("#" + colorId).removeClass("active").dequeue()});
 }
