@@ -153,6 +153,7 @@
   opacity: 0.75;
   cursor: pointer;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
   }
 button{
   border: none;
@@ -166,12 +167,8 @@ button{
 }
 #blue.active, #green.active, #yellow.active, #red.active{
   opacity: 1;
-  outline: none;
 }
 
-button:focus{
-  outline: none;
-}
 
 .colors-topleft{
   border-radius: 100% 0 0 0;
@@ -226,6 +223,7 @@ button:focus{
   }
   
 }
+
 
 </style>
 </head>
@@ -291,6 +289,10 @@ var strict;
 
 $(".lose-overlay").hide();
 $(".win-overlay").hide();
+
+$("button").on('click touchend', function(x){
+  x.preventDefault();
+})
 
 $("#strict").on("click touchend", function(){
   if (computerArray.length < 2){
@@ -447,9 +449,6 @@ function win(){
   //Will make win-overlay that says "YOU WIN!" and says "Play again?" underneath. May attach fanfare or something when winning?
   $(".win-overlay").show();
 }
-
-
-
 
 </script>
 </body>
